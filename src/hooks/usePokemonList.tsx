@@ -5,6 +5,7 @@ import { Pokemon } from "../types/Pokemon";
 export const usePokemonList = () => {
   const [pokemonList, setpokemonList] = useState<Pokemon[]>([]);
   const [blocks, setBlocks] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   const requestPokemon = async (page: number) => await getPokemonList(page);
 
@@ -12,14 +13,17 @@ export const usePokemonList = () => {
     (async () => {
       const pokemon = await requestPokemon(1);
       setpokemonList(pokemon);
+      setLoading(false)
     })();
   }, []);
 
   const nextPage = useCallback(async () => {
+    setLoading(true)
     const more = await requestPokemon(blocks + 1);
     setBlocks((prev) => prev + 1);
     setpokemonList((prev) => [...prev, ...more]);
+    setLoading(false)
   }, [blocks]);
 
-  return { pokemonList, nextPage };
+  return { pokemonList, nextPage, loading };
 };
