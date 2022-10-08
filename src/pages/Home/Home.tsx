@@ -2,7 +2,12 @@ import { useState } from "react";
 import { Box, Fade, Alert, Divider, Button } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { BaseLayout } from "../../layouts";
-import { PokemonList, SearchFilter, SearchInput } from "../../components";
+import {
+  PokemonList,
+  SearchContainer,
+  SearchFilter,
+  SearchInput,
+} from "../../components";
 import { usePokemonList } from "../../hooks";
 import { Pokemon } from "../../types";
 
@@ -31,14 +36,14 @@ export const Home = () => {
 
   return (
     <BaseLayout>
-      <Box sx={{ my: 3, display: "flex", justifyContent: "space-between" }}>
+      <SearchContainer>
         <SearchFilter
           onFilter={onFilter}
           filterIndex={filterIndex}
           setFilterIndex={setFilterIndex}
         />
         <SearchInput onSearch={onSearch} />
-      </Box>
+      </SearchContainer>
       <Divider sx={{ mb: 3 }} />
       {error ? (
         <Alert severity="error" color="info">
@@ -65,7 +70,7 @@ export const Home = () => {
         )}
 
         {searchResult && searchResult.length >= 15 && (
-          <Fade in={Boolean(pokemonList.length)}>
+          <Fade in={Boolean(searchResult.length)}>
             <Button
               size="large"
               onClick={() => filterNext()}
