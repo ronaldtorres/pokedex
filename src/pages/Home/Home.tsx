@@ -1,14 +1,15 @@
 import { useState } from "react";
-import { Box, Fade, Alert } from "@mui/material";
+import { Box, Fade, Alert, Divider, Button } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { BaseLayout } from "../../layouts";
-import { PokemonList, SearchInput } from "../../components";
+import { PokemonList, SearchFilter, SearchInput } from "../../components";
 import { usePokemonList } from "../../hooks";
 import { Pokemon } from "../../types";
 
 export const Home = () => {
   const { pokemonList, nextPage, loading } = usePokemonList();
   const [searchResult, setSearchResult] = useState<Pokemon[] | null>(null);
+  const [filterIndex, setFilterIndex] = useState(1);
   const [error, setError] = useState("");
 
   const onSearch = (result: Pokemon | null, error: boolean = false) => {
@@ -20,12 +21,25 @@ export const Home = () => {
     setError("Pokemon not found");
   };
 
+  const onFilter = (result: Pokemon[] | null, error: boolean = false) => {
+    return result ? setSearchResult(result) : setSearchResult(null);
+  };
+
+  const filterNext = () => {
+    setFilterIndex(filterIndex + 1);
+  };
+
   return (
     <BaseLayout>
-      <Box sx={{ my: 3 }}>
+      <Box sx={{ my: 3, display: "flex", justifyContent: "space-between" }}>
+        <SearchFilter
+          onFilter={onFilter}
+          filterIndex={filterIndex}
+          setFilterIndex={setFilterIndex}
+        />
         <SearchInput onSearch={onSearch} />
       </Box>
-
+      <Divider sx={{ mb: 3 }} />
       {error ? (
         <Alert severity="error" color="info">
           {error}
@@ -47,6 +61,19 @@ export const Home = () => {
             >
               Load more
             </LoadingButton>
+          </Fade>
+        )}
+
+        {searchResult && searchResult.length >= 15 && (
+          <Fade in={Boolean(pokemonList.length)}>
+            <Button
+              size="large"
+              onClick={() => filterNext()}
+              variant="outlined"
+              color="primary"
+            >
+              Get more results
+            </Button>
           </Fade>
         )}
       </Box>

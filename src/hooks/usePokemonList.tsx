@@ -25,5 +25,5 @@ export const usePokemonList = () => {
     setLoading(false);
   }, [blocks]);
 
-  return { pokemonList, setPokemonList, setLoading, nextPage, loading };
+  return { pokemonList, setPokemonList, loading, setLoading, nextPage };
 };

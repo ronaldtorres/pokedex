@@ -35,3 +35,28 @@ export const getPokemonList = async (page: number) => {
 
   return pokemonList;
 };
+
+type byTypeProps = {
+  pokemon: { name: string };
+};
+
+export const getPokemonByType = async (type: string, pokemonAmount = LIMIT) => {
+  try {
+    const response = await fetch(`${baseURL}/type/${type}`);
+    const data = await response.json();
+
+    const promises = data.pokemon
+      .filter(
+        (item: byTypeProps, index: number) => index + 1 <= pokemonAmount && item
+      )
+      .map(
+        async (item: byTypeProps) => (await getPokemon(item.pokemon.name)).data
+      );
+
+    const pokemonList = Promise.all(promises);
+
+    return pokemonList;
+  } catch (error) {
+    console.error(error);
+  }
+};

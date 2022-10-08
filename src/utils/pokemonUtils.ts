@@ -21,9 +21,9 @@ export const pokemonColorByType = [
   { name: "water", color: "#14a8ff" },
 ];
 
-export const pokemonColor = (pokemon: Pokemon) => {
+export const pokemonColor = (pokemon: Pokemon, typeIndex = 0) => {
   return pokemonColorByType.filter(
-    (type) => pokemon.types[0].type.name.indexOf(type.name) !== -1
+    (type) => pokemon.types[typeIndex].type.name.indexOf(type.name) !== -1
   );
 };
 

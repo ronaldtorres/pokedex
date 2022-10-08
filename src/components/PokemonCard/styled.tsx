@@ -31,6 +31,8 @@ export const CardChip = styled(Chip)<{ bg: string }>(
   background-color: ${props.bg};
   color: #0A1929;
   text-transform: capitalize;
+  margin: 0 4px;
+  box-shadow: 20px 20px 33px ${props.bg}, -20px 20px 33px ${props.bg}AE;
 `
 );
 
