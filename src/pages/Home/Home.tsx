@@ -4,6 +4,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import { BaseLayout } from "../../layouts";
 import {
   PokemonList,
+  ScrollToTopButton,
   SearchContainer,
   SearchFilter,
   SearchInput,
@@ -81,6 +82,8 @@ export const Home = () => {
             </Button>
           </Fade>
         )}
+
+        <ScrollToTopButton />
       </Box>
     </BaseLayout>
   );
