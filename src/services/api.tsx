@@ -4,7 +4,7 @@ const baseURL = "https://pokeapi.co/api/v2";
 const LIMIT = 15;
 
 export const getPokemon = async (pokemon: string) => {
-  let response;
+  let response: Response | undefined;
   let data: Pokemon | null;
   let error;
 

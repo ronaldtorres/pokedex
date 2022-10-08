@@ -3,7 +3,7 @@ import { getPokemonList } from "../services/api";
 import { Pokemon } from "../types/Pokemon";
 
 export const usePokemonList = () => {
-  const [pokemonList, setpokemonList] = useState<Pokemon[]>([]);
+  const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
   const [blocks, setBlocks] = useState(1);
   const [loading, setLoading] = useState(true);
 
@@ -12,18 +12,18 @@ export const usePokemonList = () => {
   useEffect(() => {
     (async () => {
       const pokemon = await requestPokemon(1);
-      setpokemonList(pokemon);
-      setLoading(false)
+      setPokemonList(pokemon);
+      setLoading(false);
     })();
   }, []);
 
   const nextPage = useCallback(async () => {
-    setLoading(true)
+    setLoading(true);
     const more = await requestPokemon(blocks + 1);
     setBlocks((prev) => prev + 1);
-    setpokemonList((prev) => [...prev, ...more]);
-    setLoading(false)
+    setPokemonList((prev) => [...prev, ...more]);
+    setLoading(false);
   }, [blocks]);
 
-  return { pokemonList, nextPage, loading };
+  return { pokemonList, setPokemonList, setLoading, nextPage, loading };
 };
