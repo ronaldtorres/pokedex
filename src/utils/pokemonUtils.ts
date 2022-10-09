@@ -30,3 +30,9 @@ export const pokemonColor = (pokemon: Pokemon, typeIndex = 0) => {
 export const pokemonImageUrl = (pokemonId: number) => {
   return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemonId}.png`;
 };
+
+export const formatPokemonId = (id: number) => {
+  if (id < 10) return `#00${id}`;
+  else if (id >= 10 && id < 99) return `#0${id}`;
+  else return `#${id}`;
+};

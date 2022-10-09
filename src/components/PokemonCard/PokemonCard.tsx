@@ -12,7 +12,7 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
 import { Pokemon } from "../../types";
 import { CardChip, CardContainer, CardTitle, CardContentBox } from "./styled";
-import { pokemonColor, pokemonImageUrl } from "../../utils";
+import { pokemonColor, pokemonImageUrl, formatPokemonId } from "../../utils";
 
 type PokemonCardTpe = {
   pokemon: Pokemon;
@@ -52,6 +52,14 @@ export const PokemonCard: FC<PokemonCardTpe> = ({
             </Typography>
           </Box>
           <CardContentBox>
+            <Box>
+              <Typography fontWeight="bold" variant="subtitle1">
+                {formatPokemonId(pokemon.id)}
+              </Typography>
+              <Typography variant="body1" color="text.secondary">
+                Id
+              </Typography>
+            </Box>
             <Box>
               <Typography fontWeight="bold" variant="subtitle1">
                 {`${pokemon.weight / 10}`} kg
