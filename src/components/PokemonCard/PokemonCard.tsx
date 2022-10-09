@@ -23,7 +23,7 @@ export const PokemonCard: FC<PokemonCardTpe> = ({ pokemon }) => {
         sx={{ pointerEvents: "none", minHeight: "300px", minWidth: "300px" }}
       />
       <CardContent>
-        <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+        <Box sx={{ display: "flex", justifyContent: "center", my: 2 }}>
           <Typography fontWeight="bold" variant="subtitle1">
             {pokemon.types.map(({ type }, i) => (
               <CardChip

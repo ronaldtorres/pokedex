@@ -4,7 +4,7 @@ import { Container } from "@mui/material";
 export const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
-      <Container sx={{ marginTop: "100px" }}>{children}</Container>
+      <Container sx={{ marginTop: "50px" }}>{children}</Container>
     </>
   );
 };

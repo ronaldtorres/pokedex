@@ -4,3 +4,4 @@ export * from "./SearchInput";
 export * from "./SearchFilter";
 export * from "./SearchContainer";
 export * from "./ScrollToTopButton";
+export * from "./PokemonStats";
