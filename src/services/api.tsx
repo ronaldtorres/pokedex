@@ -1,6 +1,6 @@
 import { Pokemon } from "../types/Pokemon";
 
-const baseURL = "https://pokeapi.co/api/v2";
+const baseURL = process.env.REACT_APP_API_POKEMON;
 const LIMIT = 15;
 
 export const getPokemon = async (pokemon: string) => {
