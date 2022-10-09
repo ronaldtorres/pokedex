@@ -3,6 +3,7 @@ import { Box, Fade, Alert, Divider, Button } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { BaseLayout } from "../../layouts";
 import {
+  Header,
   PokemonList,
   ScrollToTopButton,
   SearchContainer,
@@ -37,6 +38,7 @@ export const Home = () => {
 
   return (
     <BaseLayout>
+      <Header />
       <SearchContainer>
         <SearchFilter
           onFilter={onFilter}

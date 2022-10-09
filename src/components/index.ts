@@ -5,3 +5,4 @@ export * from "./SearchFilter";
 export * from "./SearchContainer";
 export * from "./ScrollToTopButton";
 export * from "./PokemonStats";
+export * from "./Header";

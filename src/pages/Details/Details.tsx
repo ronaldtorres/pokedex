@@ -24,6 +24,8 @@ export const Details = () => {
         setPokemon(res.data);
       }
     });
+    // Go to top when navigate to details view
+    document.body.scrollIntoView();
   }, [name]);
 
   return !pokemon ? null : (
