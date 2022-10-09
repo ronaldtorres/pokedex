@@ -7,14 +7,17 @@ import { getPokemon } from "../../services/api";
 import { Pokemon } from "../../types";
 import { pokemonColor } from "../../utils";
 import { PokemonCard, PokemonStats } from "../../components";
+import { useFavorites } from "../../hooks";
 
 export const Details = () => {
   const { name } = useParams();
   const [pokemon, setPokemon] = useState<Pokemon>();
   const navigate = useNavigate();
-  const color = useMemo(() => {
-    return pokemon ? pokemonColor(pokemon)[0].color : "";
-  }, [pokemon]);
+  const color = useMemo(
+    () => (pokemon ? pokemonColor(pokemon)[0].color : ""),
+    [pokemon]
+  );
+  const { toggleFavorite, favorites } = useFavorites();
 
   useEffect(() => {
     if (!name) return;
@@ -31,7 +34,8 @@ export const Details = () => {
   return !pokemon ? null : (
     <BaseLayout>
       <Button onClick={() => navigate(-1)}>
-        <ArrowBackIcon /> Back
+        <ArrowBackIcon />
+        <Box sx={{ ml: 1 }}>Back</Box>
       </Button>
       <Typography variant="h3" sx={{ my: 2 }} fontWeight={700}>
         Stats for{" "}
@@ -42,7 +46,11 @@ export const Details = () => {
       <Grid sx={{ paddingTop: 4 }} container spacing={8}>
         <Grid item lg={4}>
           <Box>
-            <PokemonCard pokemon={pokemon} />
+            <PokemonCard
+              pokemon={pokemon}
+              isFavorite={pokemon.name in favorites}
+              onClickFavorite={toggleFavorite}
+            />
           </Box>
         </Grid>
         <Grid item lg={8}>

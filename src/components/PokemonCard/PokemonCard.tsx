@@ -1,15 +1,30 @@
 import { FC } from "react";
-import { Box, CardContent, CardMedia, Fade, Typography } from "@mui/material";
+import {
+  Box,
+  CardContent,
+  CardMedia,
+  Fade,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import StraightenIcon from "@mui/icons-material/Straighten";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import StarIcon from "@mui/icons-material/Star";
 import { Pokemon } from "../../types";
 import { CardChip, CardContainer, CardTitle, CardContentBox } from "./styled";
 import { pokemonColor, pokemonImageUrl } from "../../utils";
 
 type PokemonCardTpe = {
   pokemon: Pokemon;
+  isFavorite?: boolean;
+  onClickFavorite?: (p: Pokemon, state: boolean) => void;
 };
 
-export const PokemonCard: FC<PokemonCardTpe> = ({ pokemon }) => {
+export const PokemonCard: FC<PokemonCardTpe> = ({
+  pokemon,
+  onClickFavorite,
+  isFavorite,
+}) => {
   const imgUrl = pokemonImageUrl(pokemon.id);
   const [{ color }] = pokemonColor(pokemon);
 
@@ -21,7 +36,7 @@ export const PokemonCard: FC<PokemonCardTpe> = ({ pokemon }) => {
           component="img"
           image={imgUrl}
           alt={pokemon.name}
-          sx={{ pointerEvents: "none", minHeight: "300px", minWidth: "300px" }}
+          sx={{ pointerEvents: "none", minBlockSize: "300px" }}
         />
         <CardContent>
           <Box sx={{ display: "flex", justifyContent: "center", my: 2 }}>
@@ -57,6 +72,21 @@ export const PokemonCard: FC<PokemonCardTpe> = ({ pokemon }) => {
               <Typography variant="body1" color="text.secondary">
                 Height
               </Typography>
+            </Box>
+            <Box>
+              <IconButton
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  onClickFavorite && onClickFavorite(pokemon, !isFavorite);
+                }}
+              >
+                {isFavorite ? (
+                  <StarIcon fontSize="large" />
+                ) : (
+                  <StarBorderIcon fontSize="large" />
+                )}
+              </IconButton>
             </Box>
           </CardContentBox>
         </CardContent>
