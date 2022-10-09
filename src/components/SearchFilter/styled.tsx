@@ -1,14 +1,18 @@
 import { Paper } from "@mui/material";
 import { styled } from "@mui/system";
 
-export const FilterContainer = styled(Paper)`
+export const FilterContainer = styled(Paper)(
+  ({ theme: {breakpoints} }) => `
   display: flex;
   flex-wrap: no-wrap;
-  max-width: 340px;
   overflow-x: scroll;
   padding: 8px;
   margin: 0;
-  background-color: transparent;
+  background: transparent;
+
+  ${breakpoints.up('lg')} {
+    width: 52%
+  }
 
   &::-webkit-scrollbar {
     height: 5px;
@@ -27,4 +31,5 @@ export const FilterContainer = styled(Paper)`
   &::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
-`;
+`
+);
